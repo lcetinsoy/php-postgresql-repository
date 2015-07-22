@@ -1,0 +1,10 @@
+{
+
+    "autoload": {
+        "psr-0": {"PostgreSqlRepository": "src/"}
+    },
+
+    "require-dev": {
+        "atoum/atoum": "~2.1"
+    }
+}
