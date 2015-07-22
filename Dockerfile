@@ -1,3 +1,4 @@
+FROM debian:wheezy
 
 MAINTAINER lcefr <laurent.cetinsoy@gmail.com>
 
@@ -11,7 +12,5 @@ RUN mv composer.phar /usr/local/bin/composer
 
 RUN php -m
 
-
 EXPOSE 80 80
-CMD ["php vendor/bin/atoum test/ConnectionFactory.php"]
 
