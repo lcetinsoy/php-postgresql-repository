@@ -23,8 +23,9 @@ class RandomAggregateRepository extends Test {
         $json = json_encode(array('name' => 'sdsdsd', 'attrnum' => array(1, 2, 3)));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
 
-        $this->given($this->newTestedInstance(new Serializer($normalizers, $encoders), $this->getFactory()))
+        $this->given($this->newTestedInstance($serializer, $this->getFactory()))
                 ->object($this->testedInstance)
                 ->isInstanceOf('lcefr\PostgreSqlRepository\AbstractPostgreSqlRepository')
                 ->and($ag = new RandomAggregate('lcefr', 'laurent.cetinsoy@gmail.com'))

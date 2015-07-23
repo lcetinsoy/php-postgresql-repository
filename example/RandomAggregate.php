@@ -19,9 +19,4 @@ class RandomAggregate {
     function getEmail() {
         return $this->email;
     }
-
-    function __toString() {
-      return "coucou" ;
-    }
-
 }
