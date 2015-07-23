@@ -18,7 +18,7 @@ class RandomAggregateRepository extends Test {
         $connection->exec('create table test (id uuid, data jsonb);');
     }
 
-    function testInsertAsJson() {
+    function testSaveAggregate() {
 
         $json = json_encode(array('name' => 'sdsdsd', 'attrnum' => array(1, 2, 3)));
         $encoders = array(new JsonEncoder());
