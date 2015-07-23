@@ -1,10 +1,22 @@
 {
 
     "autoload": {
-        "psr-0": {"PostgreSqlRepository": "src/"}
+        "psr-4": {
+            "lcefr\\PostgreSqlRepository\\": "src/",
+            "lcefr\\PostgreSqlRepository\\Example\\": "example/",
+            "tests\\": "tests/"
+            
+            }
     },
 
     "require-dev": {
         "atoum/atoum": "~2.1"
+    },
+
+    "require": {
+
+    
+    "symfony/serializer": "~2.7"
+
     }
 }

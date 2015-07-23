@@ -1,6 +1,6 @@
 <?php
 
-namespace PostgreSqlRepository;
+namespace lcefr\PostgreSqlRepository;
 
 class ConnectionFactory {
 
@@ -20,7 +20,6 @@ class ConnectionFactory {
 
     function newConnection() {
 
-        var_dump($this->host);
         $connection = new \PDO('pgsql:host=' . $this->host . 
                         ';port=' . $this->port . 
                         ';dbname=' . $this->database, 
