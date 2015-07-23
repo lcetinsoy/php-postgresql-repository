@@ -12,13 +12,6 @@ abstract class AbstractPostgreSqlRepository {
         $this->connection = $factory->newConnection();
         $this->jsonSerializer = $serializer;
     }
-
-    protected function connect(ConnectionFactory $factory) {
-
-        $this->connection = $factory->newConnection();
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-
     public function saveAggregate($table, $aggregate) {
 
         $json = $this->jsonSerializer->serialize($aggregate);
