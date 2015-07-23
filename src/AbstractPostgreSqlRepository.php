@@ -15,15 +15,14 @@ abstract class AbstractPostgreSqlRepository {
 
     abstract function getTableName();
 
-    public function saveAggregate($table, $aggregate) {
+    public function saveAggregate($aggregate) {
 
         $json = $this->serialize($aggregate);
-        return $this->insertAsJson($table, $json);
+        return $this->insertAsJson($json);
     }
 
-    public function updateAggregate(){
-
-
+    public function updateAggregate() {
+        
     }
 
     public function getAggregateById($id, $aggregateName) {
