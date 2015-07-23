@@ -13,11 +13,9 @@ git clone https://github.com/lce-fr/php-postgresql-repository
 
 ## Usage
 
-Extends AbstractPostgreSqlRepository and implement
+Extends AbstractPostgreSqlRepository and implement getTableName method
 
-getTableName
-
-Depending on your normalizer 
+Depending on your serializer you might want to override serialize method 
 
 
 ## Tests
