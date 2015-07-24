@@ -21,8 +21,9 @@ abstract class AbstractPostgreSqlRepository {
         return $this->insertAsJson($json);
     }
 
-    public function updateAggregate() {
-        
+    public function updateAggregate($id, $aggregate) {
+        $json = $this->serialize($aggregate);
+        return $this->updateAsJson($id, $json);
     }
 
     public function getAggregateById($id, $aggregateName) {
@@ -38,14 +39,17 @@ abstract class AbstractPostgreSqlRepository {
 
     protected function insertAsJson($json) {
 
-        $prep = $this->connection->prepare('insert into ' . $this->getTableName() . ' (data) VALUES (:json)');
+        $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+        $prep = $this->connection->prepare('insert into ' . $this->getTableName() . ' (data) VALUES (:json) RETURNING id');
         $prep->bindParam(':json', $json);
-        return $prep->execute();
+        $prep->execute();
+        $id = $prep->fetch();
+        return $id['id'];
     }
 
     protected function updateAsJson($id, $json) {
 
-        $prep = $this->connection->prepare('update ' . $this->getTableName() . 'SET (data) VALUES(:json) WHERE id=:id');
+        $prep = $this->connection->prepare('update ' . $this->getTableName() . ' SET data =:json WHERE id=:id');
 
         $prep->bindParam(':id', $id);
         $prep->bindParam(':json', $json);

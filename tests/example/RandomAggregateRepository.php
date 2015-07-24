@@ -15,12 +15,11 @@ class RandomAggregateRepository extends Test {
     function setUp() {
 
         $connection = $this->getConnection();
-        $connection->exec('create table test (id uuid, data jsonb);');
+        $connection->exec('create table test (id SERIAL, data jsonb);');
     }
 
     function testSaveAggregate() {
 
-        $json = json_encode(array('name' => 'sdsdsd', 'attrnum' => array(1, 2, 3)));
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         $serializer = new Serializer($normalizers, $encoders);
@@ -29,7 +28,21 @@ class RandomAggregateRepository extends Test {
                 ->object($this->testedInstance)
                 ->isInstanceOf('lcefr\PostgreSqlRepository\AbstractPostgreSqlRepository')
                 ->and($ag = new RandomAggregate('lcefr', 'laurent.cetinsoy@gmail.com'))
-                ->boolean($this->testedInstance->saveAggregate($ag))
+                ->and($id = $this->testedInstance->saveAggregate($ag))
+                ->integer($id)
+                ->isEqualTo(1);
+    }
+
+    function testUpdateAggregate() {
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $this->given($this->newTestedInstance($serializer, $this->getFactory()))
+                ->and($id = $this->testedInstance->saveAggregate(new RandomAggregate('before', 'laurentcetinsoy@gmail.com')))
+                ->and($ag = new RandomAggregate('update', 'laurent.cetinsoy@gmail.com'))
+                ->boolean($this->testedInstance->updateAggregate($id, $ag))
                 ->isEqualTo(true);
     }
 
