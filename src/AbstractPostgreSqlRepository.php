@@ -26,11 +26,13 @@ abstract class AbstractPostgreSqlRepository {
         return $this->updateAsJson($id, $json);
     }
 
-    public function getAggregateById($id, $aggregateName) {
+    public function getAggregateById($id) {
 
-        $prep = $conn->prepare('select data FROM ' . $aggregateName . 'WHERE id=:id');
+        $prep = $this->connection->prepare('select data FROM ' . $this->getTableName() . ' WHERE id=:id');
         $prep->bindParam(':id', $id);
-        return $prep->execute();
+        $prep->execute();
+        $result = $prep->fetch();
+        return $result['data'];
     }
 
     protected function serialize($aggregate) {

@@ -30,7 +30,7 @@ class RandomAggregateRepository extends Test {
                 ->and($ag = new RandomAggregate('lcefr', 'laurent.cetinsoy@gmail.com'))
                 ->and($id = $this->testedInstance->saveAggregate($ag))
                 ->integer($id)
-                ->isEqualTo(1);
+                ->isGreaterThan(0);
     }
 
     function testUpdateAggregate() {
@@ -44,6 +44,20 @@ class RandomAggregateRepository extends Test {
                 ->and($ag = new RandomAggregate('update', 'laurent.cetinsoy@gmail.com'))
                 ->boolean($this->testedInstance->updateAggregate($id, $ag))
                 ->isEqualTo(true);
+    }
+
+    function testGetAggregate() {
+
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $this->given($this->newTestedInstance($serializer, $this->getFactory()))
+                ->and($id = $this->testedInstance->saveAggregate(new RandomAggregate('before', 'laurentcetinsoy@gmail.com')))
+                ->string($this->testedInstance->getAggregateById($id))
+                ->contains('before')
+                ->contains('laurentcetinsoy@gmail.com');
     }
 
     function tearDown() {
