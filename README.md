@@ -24,8 +24,8 @@ Depending on your serializer you might want to override serialize method.
 ./test.sh
 
 Testing workflow can be improved, please tell me how:
-  - How to wait that the postgresql server is setup before running test container please tell me !
-  - Only running composer update the first time to gain speed.
+  - How to wait that the postgresql server is setup before running test container 
+  - How to only run once "composer update" to increase testing speed.
 
 ##Contributing
 
