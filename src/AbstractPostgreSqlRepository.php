@@ -31,8 +31,15 @@ abstract class AbstractPostgreSqlRepository {
         $prep = $this->connection->prepare('select data FROM ' . $this->getTableName() . ' WHERE id=:id');
         $prep->bindParam(':id', $id);
         $prep->execute();
-        $result = $prep->fetch();
-        return $result['data'];
+        return $prep->fetchColumn();
+    }
+
+    public function findBy($criteria, $value) {
+        $query = 'select * FROM ' . $this->getTableName() . ' WHERE data ->> \'' . $criteria . '\'=:' . $criteria;
+        $prep = $this->connection->prepare($query);
+        $prep->bindParam(':' . $criteria, $value);
+        $prep->execute();
+        return $prep->fetchAll();
     }
 
     protected function serialize($aggregate) {
@@ -45,8 +52,7 @@ abstract class AbstractPostgreSqlRepository {
         $prep = $this->connection->prepare('insert into ' . $this->getTableName() . ' (data) VALUES (:json) RETURNING id');
         $prep->bindParam(':json', $json);
         $prep->execute();
-        $id = $prep->fetch();
-        return $id['id'];
+        return $prep->fetchColumn();
     }
 
     protected function updateAsJson($id, $json) {

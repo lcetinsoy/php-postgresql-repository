@@ -56,8 +56,24 @@ class RandomAggregateRepository extends Test {
         $this->given($this->newTestedInstance($serializer, $this->getFactory()))
                 ->and($id = $this->testedInstance->saveAggregate(new RandomAggregate('before', 'laurentcetinsoy@gmail.com')))
                 ->string($this->testedInstance->getAggregateById($id))
+                ->contains('name')
                 ->contains('before')
                 ->contains('laurentcetinsoy@gmail.com');
+    }
+
+    function testFindBy() {
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+
+        $this->given($this->newTestedInstance($serializer, $this->getFactory()))
+                ->and($this->testedInstance->saveAggregate(new RandomAggregate('lol', 'my.email@pp.fr')))
+                ->and($this->testedInstance->saveAggregate(new RandomAggregate('lol', 'you.me@dd.ff')))
+                ->and($this->testedInstance->saveAggregate(new RandomAggregate('lal', 'jhjshdf@df.du')))
+                ->array($this->testedInstance->findBy('name', 'lol'))
+                ->hasSize(2);
     }
 
     function tearDown() {
