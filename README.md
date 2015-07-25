@@ -1,7 +1,6 @@
 # php-postgresql-repository
 A php postgresql repository for domain driven development
 
-/!\ Not production ready yet /!\
 
 ##Installation
 
@@ -13,19 +12,20 @@ git clone https://github.com/lce-fr/php-postgresql-repository
 
 ## Usage
 
-Extends AbstractPostgreSqlRepository and implement getTableName method
+Each aggreagate is fully stored in a jsonb data column.
 
-Depending on your serializer you might want to override serialize method 
+Extends AbstractPostgreSqlRepository and implement getTableName method.
+
+Depending on your serializer you might want to override serialize method. 
 
 
 ## Tests
 
-composer update
 ./test.sh
 
 Testing workflow can be improved, please tell me how:
   - How to wait that the postgresql server is setup before running test container please tell me !
-  - What is the best way to add composer and installing vendor in the php image.
+  - Only running composer update the first time to gain speed.
 
 ##Contributing
 
