@@ -4,7 +4,7 @@ A php postgresql repository for domain driven development
 
 ##Installation
 
-composer require lcefr/postgresql-json-repository
+composer require lcefr/postgresql-json-repository dev-master
 
 ## Usage
 
@@ -17,7 +17,7 @@ Depending on your serializer you might want to override serialize method.
 
 ## Tests
 
-./test.sh
+cd vendor/lcefr/postgresql-json-repository && ./test.sh
 
 Testing workflow can be improved, please tell me how:
   - How to wait that the postgresql server is setup before running test container 
