@@ -1,4 +1,18 @@
 {
+    "name": "lcefr/postgresql-json-repository",
+    "type": "library",
+    "description": "A Domain Driven Design repository for stroring json aggregate with postgresql",
+    "keywords": ["json", "postgresql", "DDD", "Domain driven design", "repository"],
+    "homepage": "https://github.com/Seldaek/monolog",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Cetinsoy",
+            "email": "laurent.cetinsoy@gmail.com",
+            "homepage": "http://laurentcetinsoy.net",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "lcefr\\PostgreSqlRepository\\": "src/",
