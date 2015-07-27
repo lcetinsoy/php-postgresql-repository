@@ -4,11 +4,7 @@ A php postgresql repository for domain driven development
 
 ##Installation
 
-Composer package comming soon !
-
-for now :
-
-git clone https://github.com/lce-fr/php-postgresql-repository 
+composer require lcefr/postgresql-json-repository
 
 ## Usage
 
