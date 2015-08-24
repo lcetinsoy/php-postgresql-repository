@@ -13,7 +13,7 @@ abstract class AbstractPostgreSqlRepository {
         $this->serializer = $serializer;
     }
 
-    abstract function getTableName();
+    abstract protected function getTableName();
 
     public function saveAggregate($aggregate) {
 
