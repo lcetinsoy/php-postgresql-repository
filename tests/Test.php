@@ -6,14 +6,14 @@ use \atoum;
 
 class Test extends atoum {
 
-    function getPort() {
+    function getPostGresIp() {
         $port = getenv('PGSQLD_PORT_5432_TCP_ADDR');
         return $port;
     }
 
     function getFactory() {
         return new \lcefr\PostgreSqlRepository\ConnectionFactory(
-                $this->getPort(), '5432', 'postgres', 'postgres', 'test'
+                $this->PostGresIp(), '5432', 'postgres', 'postgres', 'test'
         );
     }
 
