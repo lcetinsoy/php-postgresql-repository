@@ -8,12 +8,13 @@ class Test extends atoum {
 
     function getPostGresIp() {
         $port = getenv('PGSQLD_PORT_5432_TCP_ADDR');
+        
         return $port;
     }
 
     function getFactory() {
         return new \lcefr\PostgreSqlRepository\ConnectionFactory(
-                $this->PostGresIp(), '5432', 'postgres', 'postgres', 'test'
+                $this->getPostGresIp(), '5432', 'postgres', 'postgres', 'test'
         );
     }
 

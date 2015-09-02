@@ -17,7 +17,7 @@ class ConnectionFactory extends Test {
     function testNewConnection() {
 
         $this->if($factory = new \lcefr\PostgreSqlRepository\ConnectionFactory(
-                $this->getPort() , '5432', 'postgres', 'postgres', 'test'
+                $this->getPostGresIp() , '5432', 'postgres', 'postgres', 'test'
                 ))
                 ->then($connection = $factory->newConnection())
                 ->object($connection)
